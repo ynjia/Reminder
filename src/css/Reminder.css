@@ -1,0 +1,366 @@
+body {
+    font-family: "Helvetica";
+    font-size: 11px;
+    cursor: default;
+}
+
+*[contentEditable="true"] {
+    cursor: text;
+}
+
+#sidePanel {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 170px;
+    background: #d4dde6;
+    border-right: 1px solid #a5a5a5;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+#addCalendarType input.addButton, input.query {
+    margin-left: 90px;
+}
+
+#colorBox {
+    background: #F3F3F3;
+    border: 1px solid #CCC;
+    margin: 5px auto 0px;
+    overflow: hidden;
+    width: 110px;
+}
+
+#colorBox div.colorBlock {
+    border: 1px solid #F3F3F3;
+    float: left;
+    height: 16px;
+    padding: 2px;
+    width: 16px;
+}
+
+#colorBox div.colorBlock a {
+    border: 1px solid #BBB;
+    display: block;
+    height: 14px;
+    overflow: hidden;
+    width: 14px;
+}
+
+#rightPanel {
+    position: relative;
+    left: 0;
+    top: -10px;
+    bottom: 0;
+    width: 165px;
+    height: 810px;
+    background: #d4dde6;
+    border-left: 1px solid #a5a5a5;
+    margin-left: 0;
+    margin-right: 0;
+    float: right;
+}
+
+#searchArea {
+    position: relative;
+    background-color: #f1f1f1;
+    float: right;
+    top: 10px
+}
+
+input[type="search"] {
+    -webkit-appearance: searchfield;
+}
+
+#searchResults {
+    position: relative;
+    left: 0;
+    right: 0;
+    top: 40px;
+    bottom: 0;
+    margin: 0;
+    padding: 0;
+    float: right;
+    list-style-position: inside;
+}
+
+#searchResults li {
+    padding: 10px;
+}
+
+.colorIndicator {
+    display: inline-block;
+    width: 20px;
+    height: 1em;
+    vertical-align: -2px;
+    border: 1px black solid;
+    margin-right: 5px;
+}
+
+#gridView {
+    position: absolute;
+    left: 171px;
+    right: 171;
+    top: 0;
+    bottom: 0;
+    background: #ffffff;
+}
+
+#gridView.inactive {
+    opacity: 0.5;
+}
+
+#eventOverlay {
+    position: absolute;
+    left: 171px;
+    right: 171px;
+    top: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: auto;
+    opacity: 0;
+    -webkit-transition: opacity 0.2s ease-in;
+}
+
+#eventOverlay.show {
+    opacity: 1;
+    z-index: 1000;
+}
+
+#details {
+    position: absolute;
+    background: white;
+    left: 30%;
+    right: 30%;
+    top: 20%;
+    bottom: 20%;
+    overflow: hidden;
+    padding: 30px;
+    font-size: 12px;
+}
+
+#eventTitle {
+    font-size: 20px;
+}
+
+#details dt {
+    width: 20%;
+    float: left;
+    clear: both;
+    color: #999;
+    text-align: right;
+    margin-top: 10px;
+}
+
+#details dd {
+    display: inline-block;
+    width: 70%;
+    float: left;
+    margin-left: 5%;
+    margin-top: 10px;
+    display: inline-block;
+    text-align: left;
+}
+
+#details input {
+    position: absolute;
+    bottom: 15px;
+}
+
+#details input.doneInput {
+    right: 15px;
+}
+
+#details input.cancelInput {
+    right: 70px;
+}
+
+#eventDisclosureArrow {
+    display: none;
+    float: left;
+    width: 12px;
+    height: 12px;
+}
+
+#eventDisclosureArrow.show {
+    display: inline-block;
+}
+
+#map {
+    display: none;
+    width: 100%;
+    min-width: 200px;
+    height: 180px;
+    overflow: hidden;
+    opacity: 0;
+}
+
+#map.show {
+    opacity: 1;
+    display: block;
+}
+
+#mapImage {
+    width: 100%;
+}
+
+#details.showingMap {
+    top: 10%;
+    bottom: 10%;
+}
+
+#eventFrom .time, #eventTo .time {
+    display: inline-block;
+    min-width: 5px;
+    max-width: 20px;
+}
+
+h3 {
+    color: #5c6e91;
+    font-size: 11px;
+    text-shadow: 0.1em 0.1em #e5ebee;
+    margin-left: 7px;
+    margin-bottom: 4px;
+}
+
+#calendarList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#calendarList li {
+    padding-left: 23px;
+}
+
+#calendarList li.selected {
+    border-top: 1px solid #4580c8;
+    color: white;
+    font-weight: bold;
+    text-shadow: 0.1em 0.1em #6c6c6c;
+}
+
+#calendarList input {
+    margin-right: 5px;
+}
+
+#gridView h2 {
+    margin-top: 8px;
+    margin-bottom: 5px;
+    text-align: center;
+    color: #3f3f3f;
+    font-size: 19px;
+    font-weight: bolder;
+}
+
+#gridView .navButtonGroup {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#gridView .navButtonGroup h2 {
+    display: inline;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.navButton {
+    font-size: 14px;
+    font-weight: bold;
+    vertical-align: top;
+}
+
+#daysHeader {
+    margin-top: 30px;
+}
+
+.day {
+    display: inline-block;
+    width: 14%;
+    float: left;
+    -webkit-box-sizing: border-box;
+}
+
+.day:nth-child(7n+1), .day:nth-child(7n+7) {
+    width: 15%;
+}
+
+.day.title {
+    color: #626262;
+    text-align: center;
+    font-weight: bold;
+}
+
+#daysGrid {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 80px;
+    bottom: 0;
+}
+
+.day.box {
+    height: 20%;
+    border: 1px #ccc;
+    border-top-style: solid;
+    border-right-style: solid;
+    position: relative;
+}
+
+.day.box.today {
+    background-image: url(../images/blow.jpg);
+    background-repeat: no-repeat;
+    background-position: right center, center;
+}
+
+.day.box:nth-child(7n+7) {
+    border-right-style: none;
+}
+
+.day .date {
+    color: #212121;
+    text-align: right;
+    font-size: 12px;
+    padding-right: 5px;
+    padding-top: 5px;
+}
+
+.day.box.notThisMonth .date {
+    color: #a6a6a6;
+}
+
+.day .contents {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 20px;
+    bottom: 0;
+    overflow: auto;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding: 2px 0;
+    list-style-position: inside;
+    color: orange;
+}
+
+.day .contents li {
+    background-color: rgba(255, 255, 255, 0);
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+ul.contents li.selected {
+    background-color: #6699ff;
+}
+
+li.highlighted {
+    background-color: #ffa !important;
+}
+
+#activationChart {
+    border: 1px #ffa;
+    margin-left: 20px;
+    margin-top: 40px;
+}

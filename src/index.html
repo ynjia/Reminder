@@ -1,0 +1,134 @@
+<html manifest="Reminder.manifest">
+<head>
+    <meta name="application-name" content="Remind Me">
+    <title>Remind Me</title>
+    <link rel="stylesheet" type="text/css" href="css/Reminder.css">
+    <script type="text/javascript" src="js/Jquery.js"></script>
+    <script type="text/javascript" src="js/Database.js"></script>
+    <script type="text/javascript" src="js/Utilities.js"></script>
+    <script type="text/javascript" src="js/Reminder.js"></script>
+    <script type="text/javascript" src="js/Chart.js"></script>
+</head>
+
+<body onload="pageLoaded()">
+<div id="sidePanel">
+    <h3>Add New Type</h3>
+    <div id="colorBox">
+        <div val="1" class="colorBlock" >
+            <a hidefocus="true" style="background-color:#fe0100;border-color:#a70202"></a>
+        </div>
+        <div val="256" class="colorBlock" >
+            <a  hidefocus="true" style="background-color:#ff6d00;border-color:#b85500"></a>
+        </div>
+        <div val="2" class="colorBlock" >
+            <a  hidefocus="true" style="background-color:#fff000;border-color:#c5b611"></a>
+        </div>
+        <div val="4" class="colorBlock" >
+            <a  hidefocus="true" style="background-color:#57c409;border-color:#358025"></a>
+        </div>
+        <div val="8" class="colorBlock" >
+            <a  hidefocus="true" style="background-color:#2beceb;border-color:#049193"></a>
+        </div>
+        <div val="16" class="colorBlock" >
+            <a  hidefocus="true" style="background-color:#006aff;border-color:#004ab3"></a>
+        </div>
+        <div val="32" class="colorBlock" >
+            <a  hidefocus="true" style="background-color:#9300fc;border-color:#6800c3"></a>
+        </div>
+        <div val="64" class="colorBlock" >
+            <a  hidefocus="true" style="background-color:#ff1fcd;border-color:#b00097"></a>
+        </div>
+        <div val="128" class="colorBlock" >
+            <a  hidefocus="true" style="background-color:#6a3100;border-color:#482501"></a>
+        </div>
+        <div val="512" class="colorBlock" >
+            <a  hidefocus="true" style="background-color:#000000;border-color:#000000"></a>
+        </div>
+    </div>
+    <div id="addCalendarType">
+        <input type="text" id="newTypeValue" name="typeName">
+        <input class="addButton" type="button" onclick="addType()" value="AddType">
+    </div>
+    <ul id="calendarList">
+    </ul>
+    <div id="activationChart">
+           <h3>From:</h3>
+            <div id="queryEventFrom">
+                <span>Day:</span><span id="queryEventFromDate" contentEditable="true">1</span>
+                <span> Hour:</span><span id="queryEventFromHours" class="time" contentEditable="true">00</span>:
+                <span> Min:</span><span id="queryEventFromMinutes" class="time" contentEditable="true">00</span>
+            </div>
+            <h3>To:</h3>
+            <div id="queryEventTo">
+                <span>Day:</span><span id="queryEventToDate" contentEditable="true">30</span>
+                <span> Hour:</span><span id="queryEventToHours" class="time" contentEditable="true">00</span>:
+                <span> Min:</span><span id="queryEventToMinutes" class="time" contentEditable="true">00</span>
+            </div>
+    </div>
+    <input class="query" type="button" value="Query" onclick="queryChar()">
+    <canvas id="chart" width="160" height="160"></canvas>
+</div>
+<div id="eventOverlay">
+    <div id="details">
+        <div id="eventTitle" contenteditable="true"></div>
+        <dl>
+            <dt>location</dt>
+            <dd>
+                <div id="eventLocation" contentEditable="true"></div>
+            </dd>
+            <dt>from</dt>
+            <dd id="eventFrom">
+                <span id="eventFromDate"></span>
+                <span id="eventFromHours" class="time" contentEditable="true">00</span>:<span id="eventFromMinutes"
+                                                                                              class="time"
+                                                                                              contentEditable="true">00</span>
+            </dd>
+            <dt>to</dt>
+            <dd id="eventTo">
+                <span id="eventToDate"></span>
+                <span id="eventToHours" class="time" contentEditable="true">00</span>:<span id="eventToMinutes"
+                                                                                            class="time"
+                                                                                            contentEditable="true">00</span>
+            </dd>
+            <dt style="line-height: 23px;">Remind Me</dt>
+            <dd>
+                <select id="eventCalendarType">
+                </select>
+            </dd>
+            <dt>details</dt>
+            <dd id="eventDetails" contentEditable="true"></dd>
+        </dl>
+        <input class="doneInput" type="button" value="Done" onclick="eventDetailsDismissed()">
+        <input class="cancelInput" type="button" value="Cancel" onclick="closeDialog()">
+    </div>
+</div>
+<div id="gridView">
+    <div class="navButtonGroup">
+        <input class="navButton" type="button" onclick="previousMonth()" value="Prev">
+
+        <h2><span id="monthTitle"></span></h2>
+        <input class="navButton" type="button" onclick="nextMonth()" value="Next">
+    </div>
+    <div id="daysHeader">
+        <span class="day title">Sunday</span>
+        <span class="day title">Monday</span>
+        <span class="day title">Tuesday</span>
+        <span class="day title">Wednesday</span>
+        <span class="day title">Thursday</span>
+        <span class="day title">Friday</span>
+        <span class="day title">Saturday</span>
+    </div>
+    <div id="daysGrid">
+    </div>
+</div>
+<div id="rightPanel">
+    <h3>Search</h3>
+
+    <div id="searchArea">
+        <input type="search" id="searchField" results="0" incremental="1" placeholder="" value=""
+               onsearch="searchForEvent(this.value)"></div>
+    <ul id="searchResults">
+    </ul>
+</div>
+</body>
+</html>
