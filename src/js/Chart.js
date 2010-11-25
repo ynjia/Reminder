@@ -33,17 +33,8 @@ var queryChar = function() {
     var context = canvas.getContext('2d');
     context.clearRect(0, 0, canvasWidth, canvasHeight);
 
-    chartData[0] = [];
-    chartData[1] = [];
-    chartData[0]["label"] = "one";
-    var value1 = 50;
-    chartData[0]["value"] = value1;
-    chartData[1]["label"] = "two";
-    chartData[1]["value"] = value1;
-    totalValue = value1 + value1;
+    ReminderDatabase.initCanvas();
 
-    chartColours[0] = "#0DA068";
-    chartColours[1] = "#194E9C";
     var currentPos = 0;
     for (var item in chartData) {
         chartData[item]['startAngle'] = 2 * Math.PI * currentPos;

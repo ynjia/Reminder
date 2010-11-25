@@ -60,7 +60,6 @@ function initMonthOnDisplay() {
     }
     initColorBox();
     initEventCalendarType();
-    ReminderDatabase.initCanvas();
 }
 
 function monthOnDisplayUpdated() {
@@ -131,7 +130,7 @@ function removeEventsOfCalendarType(calendarType) {
     }
 }
 
-// Event handlers 
+// Event handlers
 
 function pageLoaded() {
     document.getElementById("gridView").addEventListener("selectstart", stopEvent, true);

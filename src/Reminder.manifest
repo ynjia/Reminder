@@ -1,12 +1,12 @@
 CACHE MANIFEST
 # All resources required to make Reminder work offline
 
-Boom.aiff
 index.html
-Reminder.css
-Reminder.js
-ReminderApp.icns
-LocationImage.js
-Utilities.js
+css/Reminder.css
+js/Reminder.js
+js/Utilities.js
+js/Chart.js
+js/Database.js
+js/Jquery.js
 images/blow.jpg
 images/nice.gif

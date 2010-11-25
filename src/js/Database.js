@@ -40,14 +40,14 @@ var ReminderDatabase = {
         } catch(err) {
         }
     },
-    initCanvas:function(){
-       var self = this;
-        var eventsQuery = "SELECT count(id), eventCalendar FROM ReminderEvents WHERE (startTime BETWEEN ? and ?) group by eventCalendar";
+    initCanvas:function() {
+        var self = this;
+        var eventsQuery = "SELECT count(id) AS count, eventCalendar FROM ReminderEvents WHERE (startTime BETWEEN ? and ?) GROUP BY eventCalendar";
         var sqlArguments = [calendarStartTime, calendarEndTime];
 
-        function sqlStatementCallback(result) {
-            if(result.rows!=undefined)
-            alert(result.rows.length);
+        function sqlStatementCallback(tx, result) {
+            if (result.rows != undefined)
+                self.setChartItems(result.rows);
         }
 
         function sqlStatementErrorCallback(tx, error) {
@@ -66,7 +66,7 @@ var ReminderDatabase = {
         var eventsQuery = "SELECT id, eventTitle, eventLocation, startTime, endTime, eventCalendar, eventDetails FROM ReminderEvents WHERE (startTime BETWEEN ? and ?)";
         var sqlArguments = [calendarStartTime, calendarEndTime];
 
-        function sqlStatementCallback(result) {
+        function sqlStatementCallback(tx, result) {
             self.processLoadedEvents(result.rows);
         }
 
@@ -120,7 +120,7 @@ var ReminderDatabase = {
         var searchEventQuery = "SELECT id, eventTitle, eventLocation, startTime, endTime, eventCalendar, eventDetails FROM ReminderEvents WHERE eventTitle LIKE ? OR eventDetails LIKE ? OR eventLocation LIKE ?";
         var sqlArguments = [query, query, query];
 
-        function sqlStatementCallback(result) {
+        function sqlStatementCallback(tx, result) {
             self.processQueryResults(result.rows);
         }
 
@@ -165,17 +165,31 @@ var ReminderDatabase = {
     ,
 
     processLoadedEvents: function(rows) {
-        if(rows!=undefined)
-        for (var i = 0, length = rows.length; i < length; i++) {
-            var row = rows.item(i);
-            var dayDate = Date.dayDateFromTime(row["startTime"]);
-            var dayObj = dateToDayObjectMap[dayDate.getTime()];
-            if (!dayObj)
-                continue;
-            dayObj.insertEvent(CalendarEvent.calendarEventFromResultRow(row, false));
-            if (row["id"] > highestID)
-                highestID = row["id"];
+        if (rows != undefined)
+            for (var i = 0, length = rows.length; i < length; i++) {
+                var row = rows.item(i);
+                var dayDate = Date.dayDateFromTime(row["startTime"]);
+                var dayObj = dateToDayObjectMap[dayDate.getTime()];
+                if (!dayObj)
+                    continue;
+                dayObj.insertEvent(CalendarEvent.calendarEventFromResultRow(row, false));
+                if (row["id"] > highestID)
+                    highestID = row["id"];
 
+            }
+    },
+
+    setChartItems:function(rows) {
+        for (var i = 0; i < rows.length; i++) {
+            var row = rows.item(i);
+            chartData[i]=[];
+            var countValue = row["count"];
+            var calendar = row["eventCalendar"];
+
+            totalValue+=countValue;
+            chartData[i]["value"]=countValue;
+            chartData[i]["label"]=calendar;
+            chartColours[i] =localStorage.getItem(calendar + "_color").split(":")[1];
         }
     },
 
