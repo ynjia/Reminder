@@ -40,14 +40,17 @@ var ReminderDatabase = {
         } catch(err) {
         }
     },
-    initCanvas:function() {
+    initCanvas:function(draw) {
         var self = this;
         var eventsQuery = "SELECT count(id) AS count, eventCalendar FROM ReminderEvents WHERE (startTime BETWEEN ? and ?) GROUP BY eventCalendar";
         var sqlArguments = [calendarStartTime, calendarEndTime];
 
         function sqlStatementCallback(tx, result) {
-            if (result.rows != undefined)
+            if (result.rows != undefined){
                 self.setChartItems(result.rows);
+                draw();
+            }
+
         }
 
         function sqlStatementErrorCallback(tx, error) {

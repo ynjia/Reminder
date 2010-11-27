@@ -21,20 +21,9 @@ var sliceBorderWidth = 1;
 var sliceBorderStyle = "#fff";
 var sliceGradientColour = "#ddd";
 var chartRadius;
+var context;
 
-var queryChar = function() {
-    canvas = document.getElementById('chart');
-    if (typeof canvas.getContext === 'undefined') return;
-    canvasWidth = canvas.width;
-    canvasHeight = canvas.height;
-    centreX = canvasWidth / 2;
-    centreY = canvasHeight / 2;
-    chartRadius = Math.min(canvasWidth, canvasHeight) / 2 * 0.55;
-    var context = canvas.getContext('2d');
-    context.clearRect(0, 0, canvasWidth, canvasHeight);
-
-    ReminderDatabase.initCanvas();
-
+function draw() {
     var currentPos = 0;
     for (var item in chartData) {
         chartData[item]['startAngle'] = 2 * Math.PI * currentPos;
@@ -45,7 +34,21 @@ var queryChar = function() {
     for (var slice in chartData) {
         if (slice != currentPullOutSlice) drawSlice(context, slice);
     }
+}
+var queryChar = function() {
+    canvas = document.getElementById('chart');
+    if (typeof canvas.getContext === 'undefined') return;
+    canvasWidth = canvas.width;
+    canvasHeight = canvas.height;
+    centreX = canvasWidth / 2;
+    centreY = canvasHeight / 2;
+    chartRadius = Math.min(canvasWidth, canvasHeight) / 2 * 0.55;
+    context = canvas.getContext('2d');
+    context.clearRect(0, 0, canvasWidth, canvasHeight);
+
+    ReminderDatabase.initCanvas(draw);
 };
+
 
 function drawSlice(context, slice) {
     var startX,startY;
