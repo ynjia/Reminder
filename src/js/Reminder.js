@@ -78,6 +78,7 @@ function addType() {
     localStorage.setItem(value, content);
     localStorage.setItem(value + "_color", seletedColor);
     $("#calendarList").append(content);
+    $("#eventCalendarType").append("<option value='" + value + "'>" + value + "</option>");
 }
 
 function initDaysGrid() {

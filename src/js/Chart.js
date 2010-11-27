@@ -54,7 +54,6 @@ function drawSlice(context, slice) {
     var startX,startY;
     var startAngle = chartData[slice]['startAngle'] + chartStartAngle;
     var endAngle = chartData[slice]['endAngle'] + chartStartAngle;
-
     if (slice == currentPullOutSlice) {
         var midAngle = (startAngle + endAngle) / 2;
         var actualPullOutDistance = currentPullOutDistance * easeOut(currentPullOutDistance / maxPullOutDistance, .8);
@@ -80,7 +79,6 @@ function drawSlice(context, slice) {
     context.moveTo(startX, startY);
     context.arc(startX, startY, chartRadius, startAngle, endAngle, false);
     context.lineTo(startX, startY);
-    context.closePath();
     context.fillStyle = sliceGradient;
     context.shadowColor = ( slice == currentPullOutSlice ) ? pullOutShadowColour : "rgba( 0, 0, 0, 0 )";
     context.fill();
@@ -94,6 +92,7 @@ function drawSlice(context, slice) {
         context.strokeStyle = sliceBorderStyle;
     }
     context.stroke();
+    context.closePath();
 }
 
 function easeOut(ratio, power) {

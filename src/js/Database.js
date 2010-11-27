@@ -46,7 +46,7 @@ var ReminderDatabase = {
         var sqlArguments = [calendarStartTime, calendarEndTime];
 
         function sqlStatementCallback(tx, result) {
-            if (result.rows != undefined){
+            if (result.rows != undefined) {
                 self.setChartItems(result.rows);
                 draw();
             }
@@ -183,16 +183,17 @@ var ReminderDatabase = {
     },
 
     setChartItems:function(rows) {
+        totalValue = 0;
+        
         for (var i = 0; i < rows.length; i++) {
             var row = rows.item(i);
-            chartData[i]=[];
+            chartData[i] = [];
             var countValue = row["count"];
             var calendar = row["eventCalendar"];
-
-            totalValue+=countValue;
-            chartData[i]["value"]=countValue;
-            chartData[i]["label"]=calendar;
-            chartColours[i] =localStorage.getItem(calendar + "_color").split(":")[1];
+            totalValue += countValue;
+            chartData[i]["value"] = countValue;
+            chartData[i]["label"] = calendar;
+            chartColours[i] = localStorage.getItem(calendar + "_color").split(":")[1];
         }
     },
 

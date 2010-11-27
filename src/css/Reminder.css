@@ -309,9 +309,7 @@ h3 {
 }
 
 .day.box.today {
-    background-image: url(../images/blow.jpg);
-    background-repeat: no-repeat;
-    background-position: right center, center;
+    background: url(../images/blow.jpg) no-repeat center;
 }
 
 .day.box:nth-child(7n+7) {
