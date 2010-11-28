@@ -13,7 +13,7 @@ body {
     left: 0;
     top: 0;
     bottom: 0;
-    width: 170px;
+    width: 290px;
     background: #d4dde6;
     border-right: 1px solid #a5a5a5;
     margin-left: 0;
@@ -53,8 +53,8 @@ body {
     left: 0;
     top: -10px;
     bottom: 0;
-    width: 165px;
-    height: 810px;
+    width: 285px;
+    height: 900px;
     background: #d4dde6;
     border-left: 1px solid #a5a5a5;
     margin-left: 0;
@@ -63,10 +63,8 @@ body {
 }
 
 #searchArea {
-    position: relative;
-    background-color: #f1f1f1;
-    float: right;
-    top: 10px
+    top: 10px;
+    margin-left: 52px;
 }
 
 input[type="search"] {
@@ -75,18 +73,8 @@ input[type="search"] {
 
 #searchResults {
     position: relative;
-    left: 0;
-    right: 0;
-    top: 40px;
-    bottom: 0;
-    margin: 0;
-    padding: 0;
-    float: right;
     list-style-position: inside;
-}
-
-#searchResults li {
-    padding: 10px;
+    font-size: 16px;
 }
 
 .colorIndicator {
@@ -100,8 +88,8 @@ input[type="search"] {
 
 #gridView {
     position: absolute;
-    left: 171px;
-    right: 171;
+    left: 291px;
+    right: 291;
     top: 0;
     bottom: 0;
     background: #ffffff;
@@ -113,8 +101,8 @@ input[type="search"] {
 
 #eventOverlay {
     position: absolute;
-    left: 171px;
-    right: 171px;
+    left: 291px;
+    right: 291px;
     top: 0;
     bottom: 0;
     background: rgba(0, 0, 0, 0.2);
@@ -185,29 +173,6 @@ input[type="search"] {
 
 #eventDisclosureArrow.show {
     display: inline-block;
-}
-
-#map {
-    display: none;
-    width: 100%;
-    min-width: 200px;
-    height: 180px;
-    overflow: hidden;
-    opacity: 0;
-}
-
-#map.show {
-    opacity: 1;
-    display: block;
-}
-
-#mapImage {
-    width: 100%;
-}
-
-#details.showingMap {
-    top: 10%;
-    bottom: 10%;
 }
 
 #eventFrom .time, #eventTo .time {

@@ -50,7 +50,6 @@ var ReminderDatabase = {
                 self.setChartItems(result.rows);
                 draw();
             }
-
         }
 
         function sqlStatementErrorCallback(tx, error) {
