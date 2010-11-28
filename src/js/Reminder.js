@@ -45,8 +45,8 @@ function initEventCalendarType() {
 }
 
 function closeDialog(){
-    document.getElementById("eventOverlay").removeStyleClass("show");
-    document.getElementById("gridView").removeStyleClass("inactive");
+    $("#eventOverlay").removeClass("show");
+    $("#gridView").removeClass("inactive");
 
 }
 
@@ -177,10 +177,6 @@ function keyUpHandler(event) {
         case "U+007F":   // Delete key
             if (selectedCalendarEvent && selectedCalendarEvent.day)
                 selectedCalendarEvent.day.deleteEvent(selectedCalendarEvent);
-            $("#calendarList li.selected").remove();
-            $.each($("#calendarList li").children("input"), function() {
-                localStorage.allTypes = $(this).attr("id") + ":";
-            });
             break;
         case "Enter":
             if (selectedCalendarEvent && !document.getElementById("eventOverlay").hasStyleClass("show"))
@@ -201,7 +197,7 @@ function eventDetailsDismissed() {
     }
     closeDialog();
     selectedCalendarEvent = null;
-    document.getElementById("gridView").removeStyleClass("inactive");
+    $("#gridView").removeClass("inactive");
 }
 
 function searchForEvent(query) {
@@ -249,7 +245,7 @@ var CalendarState = {
 };
 
 function highlightEventInCalendar(calendarEvent) {
-    var itemsToHighlight = document.querySelectorAll("ul.contents li." + calendarEvent.calendar);
+    var itemsToHighlight = $("ul.contents li." + calendarEvent.calendar);
     for (var i = 0; i < itemsToHighlight.length; ++i) {
         var listItem = itemsToHighlight[i];
         if (listItem.innerText !== calendarEvent.title)
@@ -262,7 +258,7 @@ function highlightEventInCalendar(calendarEvent) {
 }
 
 function unhighlightAllEvents() {
-    var highlightedItems = document.querySelectorAll("ul.contents li.highlighted");
+    var highlightedItems = $("ul.contents li.highlighted");
     for (var i = 0; i < highlightedItems.length; ++i)
         highlightedItems[i].removeStyleClass("highlighted");
 }
