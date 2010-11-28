@@ -10,7 +10,6 @@ var ReminderDatabase = {
             return;
         }
         ReminderDatabase.dbOpened = true;
-
         var openTableStatement = "CREATE TABLE IF NOT EXISTS ReminderEvents (id REAL UNIQUE, eventTitle TEXT, eventLocation TEXT, startTime REAL, endTime REAL, eventCalendar TEXT, eventDetails TEXT)";
 
         function sqlStatementCallback() {
@@ -163,8 +162,7 @@ var ReminderDatabase = {
         }
 
         ReminderDatabase.db.transaction(sqlTransactionCallback);
-    }
-    ,
+    },
 
     processLoadedEvents: function(rows) {
         if (rows != undefined)
@@ -177,7 +175,6 @@ var ReminderDatabase = {
                 dayObj.insertEvent(CalendarEvent.calendarEventFromResultRow(row, false));
                 if (row["id"] > highestID)
                     highestID = row["id"];
-
             }
     },
 

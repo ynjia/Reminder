@@ -38,7 +38,6 @@ function initColorBox() {
     });
 }
 
-
 function initEventCalendarType() {
     $.each(localStorage.allTypes.split(":"), function() {
         $("#eventCalendarType").append("<option value='" + this + "'>" + this + "</option>");
@@ -69,7 +68,6 @@ function monthOnDisplayUpdated() {
     ReminderDatabase.openReminderEvents();
 }
 
-
 function addType() {
     var value = $("#newTypeValue").val();
     $("#newTypeValue").val("");
@@ -88,7 +86,6 @@ function initDaysGrid() {
     var daysGrid = document.getElementById("daysGrid");
     daysGrid.removeChildren();
     dateToDayObjectMap = new Object();
-
     calendarStartTime = displayedDate.getTime();
     var doneWithThisMonth = false;
     var rows = 0;
@@ -130,8 +127,6 @@ function removeEventsOfCalendarType(calendarType) {
         dayObj.hideEventsOfCalendarType(calendarType);
     }
 }
-
-// Event handlers
 
 function pageLoaded() {
     document.getElementById("gridView").addEventListener("selectstart", stopEvent, true);
@@ -221,7 +216,7 @@ function searchForEvent(query) {
     ReminderDatabase.queryEventsInDB(query);
 }
 
-// LocalStorage access ---------------------------------------------
+// LocalStorage access
 
 var CalendarState = {
     currentMonth: function() {
@@ -302,7 +297,6 @@ Day.prototype.attach = function(parent) {
     dateDiv.addStyleClass("date");
     dateDiv.innerText = this.date.getDate();
     this.divNode.appendChild(dateDiv);
-
     this.contentsListNode = document.createElement("ul");
     this.contentsListNode.addStyleClass("contents");
     this.contentsListNode.addEventListener("dblclick", Day.newEvent, false);

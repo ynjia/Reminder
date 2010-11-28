@@ -13,10 +13,6 @@ Element.prototype.addStyleClass = function(className) {
     if (className && !this.hasStyleClass(className))
         this.className += (this.className.length ? " " + className : className);
 };
-Element.prototype.addStylehaha = function(style) {
-    if (style)
-        this.style = style;
-};
 
 Element.prototype.hasStyleClass = function(className) {
     if (!className)
@@ -40,26 +36,6 @@ Element.prototype.findParentOfTagName = function(tagName) {
         parent = parent.parentNode;
     }
     return null;
-};
-
-Element.prototype.__defineGetter__("totalOffsetLeft", function() {
-    var total = 0;
-    for (var element = this; element; element = element.offsetParent)
-        total += element.offsetLeft;
-    return total;
-});
-
-Element.prototype.__defineGetter__("totalOffsetTop", function() {
-    var total = 0;
-    for (var element = this; element; element = element.offsetParent)
-        total += element.offsetTop;
-    return total;
-});
-
-String.prototype.hasSubstring = function(string, caseInsensitive) {
-    if (!caseInsensitive)
-        return this.indexOf(string) !== -1;
-    return this.match(new RegExp(string.escapeForRegExp(), "i"));
 };
 
 String.prototype.escapeCharacters = function(chars) {
@@ -104,7 +80,7 @@ Date.prototype.isToday = function() {
 
 Date.prototype.roundToHour = function() {
     if (this.getMinutes() == 0)
-        return; // Already rounded to the hour
+        return; 
     if (this.getHours() < 23)
         this.setHours(this.getHours() + 1);
     this.setMinutes(0);
