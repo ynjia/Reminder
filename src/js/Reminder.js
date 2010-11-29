@@ -6,7 +6,7 @@ var selectedCalendarEvent = null;
 var calendarStartTime = 0;
 var calendarEndTime = 0;
 var insertedStyleRuleIndexForDayBox = -1;
-var seletedColor = "#fe0100";
+var seletedColor = "background-color:#fe0100";
 
 initDatabase();
 function updateCalendarRowCount(count) {

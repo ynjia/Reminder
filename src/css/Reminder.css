@@ -1,5 +1,5 @@
 body {
-    font-family: "Helvetica";
+    font-family: "Helvetica",serif;
     font-size: 11px;
     cursor: default;
 }
@@ -122,7 +122,6 @@ input[type="search"] {
 
 #details {
     position: absolute;
-    background: white;
     left: 30%;
     right: 30%;
     top: 20%;
@@ -130,6 +129,7 @@ input[type="search"] {
     overflow: hidden;
     padding: 30px;
     font-size: 12px;
+    background: #ffff99;
 }
 
 #eventTitle {
@@ -140,7 +140,6 @@ input[type="search"] {
     width: 20%;
     float: left;
     clear: both;
-    color: #999;
     text-align: right;
     margin-top: 10px;
 }
@@ -151,7 +150,6 @@ input[type="search"] {
     float: left;
     margin-left: 5%;
     margin-top: 10px;
-    display: inline-block;
     text-align: left;
 }
 
