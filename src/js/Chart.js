@@ -121,11 +121,11 @@ function startPullOut(slice) {
     currentPullOutDistance = 0;
     clearInterval(animationId);
     animationId = setInterval(function() {
-        animatePullOut(slice);
+        pullOut(slice);
     }, 40);
 }
 
-function animatePullOut() {
+function pullOut() {
     currentPullOutDistance += pullOutFrameStep;
     if (currentPullOutDistance >= maxPullOutDistance) {
         clearInterval(animationId);
