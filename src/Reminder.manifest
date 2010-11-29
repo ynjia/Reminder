@@ -6,6 +6,8 @@ css/Reminder.css
 js/Reminder.js
 js/Utilities.js
 js/Chart.js
+js/Event.js
+js/Day.js
 js/Database.js
 js/Jquery.js
 images/blow.jpg
