@@ -35,7 +35,7 @@ Day.newEvent = function(event) {
         return;
 
     var calendarEvent = new CalendarEvent(dayObj.date, dayObj, selectedCalendarType, false);
-    calendarEvent.title = "Title";
+    calendarEvent.title = "Input Title";
     calendarEvent.from = dayObj.defaultEventStartTime();
     var endTime = new Date(calendarEvent.from);
     endTime.setHours(endTime.getHours() + 1);

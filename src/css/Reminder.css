@@ -112,7 +112,6 @@ input[type="search"] {
     background: rgba(0, 0, 0, 0.2);
     z-index: auto;
     opacity: 0;
-    -webkit-transition: opacity 0.2s ease-in;
 }
 
 #eventOverlay.show {
@@ -125,15 +124,27 @@ input[type="search"] {
     left: 30%;
     right: 30%;
     top: 20%;
-    bottom: 20%;
+    bottom: 30%;
     overflow: hidden;
     padding: 30px;
-    font-size: 12px;
-    background: #ffff99;
+    font-size: 14px;
+    background: #a3cad2;
 }
 
 #eventTitle {
     font-size: 20px;
+    border:white dashed thin;
+    height:22px;
+}
+
+#eventLocation, #eventToHours, #eventToMinutes, #eventFromHours, #eventFromMinutes{
+    border:white dotted thin;
+    height:14px;
+}
+
+#eventDetails{
+    border:white dotted thin;
+    height:126px;
 }
 
 #details dt {
