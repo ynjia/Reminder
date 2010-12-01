@@ -56,7 +56,7 @@ body {
     top: -10px;
     bottom: 0;
     width: 285px;
-    height: 870px;
+    height: 100%;
     background: #d4dde6;
     border-left: 1px solid #a5a5a5;
     float: right;
@@ -115,10 +115,10 @@ input[type="search"] {
 
 #details {
     position: absolute;
-    left: 30%;
-    right: 30%;
-    top: 20%;
-    bottom: 30%;
+    left: 15%;
+    right: 15%;
+    top: 10%;
+    bottom: 15%;
     overflow: hidden;
     padding: 30px;
     font-size: 14px;

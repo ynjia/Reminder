@@ -6,7 +6,7 @@ var centreY;
 var chartColours = [];
 var chartData = [];
 var currentPullOutSlice = -1;
-var maxPullOutDistance = 15;
+var maxPullOutDistance = 5;
 var currentPullOutDistance = 0;
 var totalValue = 0;
 var chartStartAngle = -.5 * Math.PI;
