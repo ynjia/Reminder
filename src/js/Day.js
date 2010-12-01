@@ -55,7 +55,7 @@ Day.prototype.insertEvent = function(calendarEvent) {
     if (index >= 0)
         this.eventsArray.splice(index, 1);
     calendarEvent.detach();
-    if (calendarEvent.calendar!="" &&!isCalendarTypeVisible(calendarEvent.calendar))
+    if (calendarEvent.calendar != "" && !isCalendarTypeVisible(calendarEvent.calendar))
         return;
     for (index = 0; index < this.eventsArray.length; index++) {
         if (this.eventsArray[index].from > calendarEvent.from)
@@ -80,6 +80,14 @@ Day.prototype.hideEvent = function(calendarEvent) {
         this.eventsArray.splice(index, 1);
 };
 
+Day.prototype.deleteEventsOfCalendarType = function(calendarType) {
+    if (!this.eventsArray)
+        return;
+    for (var i = 0; i < this.eventsArray.length; i++) {
+        if (this.eventsArray[i].calendar == calendarType)
+            this.deleteEvent(this.eventsArray[i]);
+    }
+};
 Day.prototype.hideEventsOfCalendarType = function(calendarType) {
     if (!this.eventsArray)
         return;

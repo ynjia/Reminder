@@ -4,7 +4,7 @@ var selectedEventType = "";
 var selectedReminderEvent = null;
 var calendarStartTime = 0;
 var calendarEndTime = 0;
-var seletedColor = "background-color:#fe0100";
+var seletedColor = "";
 
 initDatabase();
 function getSelectedColor() {
@@ -51,7 +51,15 @@ function monthOnDisplayUpdated() {
 }
 
 function addType() {
+    if (seletedColor == "") {
+        alert("Select Type Color, please");
+        return;
+    }
     var value = $("#newTypeValue").val();
+    if (value == "") {
+        alert("Input Type Name, please");
+        return;
+    }
     $("#newTypeValue").val("");
     var content = "<li><span class='colorIndicator' style='" + seletedColor + "'></span><input type='checkbox' id='" + value + "' onchange='calendarClicked(event)'>" + value + "</li>";
     localStorage.allTypes += value + ":";
@@ -61,6 +69,20 @@ function addType() {
     $("#eventEventType").append("<option value='" + value + "'>" + value + "</option>");
 }
 
+function removeType() {
+    if($("#calendarList li input:checked").length==0)return;
+    $.each($("#calendarList li input:checked"), function() {
+        var item = $(this);
+        deleteEventsOfCalendarType(item.attr("id"));
+        item.parent().remove();
+    });
+    if ($("#calendarList li").children("input").length == 0)
+        localStorage.allTypes = "";
+    else
+        $.each($("#calendarList li").children("input"), function() {
+            localStorage.allTypes = $(this).attr("id") + ":";
+        });
+}
 function initDaysGrid() {
     var displayedDate = new Date(monthOnDisplay);
     displayedDate.setDate(displayedDate.getDate() - displayedDate.getDay());
@@ -98,13 +120,22 @@ function addEventsOfCalendarType(calendarType) {
     ReminderDatabase.loadEventsFromDBForCalendarType(calendarType);
 }
 
-function removeEventsOfCalendarType(calendarType) {
+function hiddenEventsOfCalendarType(calendarType) {
     var dayElements = document.getElementById("daysGrid").childNodes;
     for (var i = 0; i < dayElements.length; i++) {
         var dayObj = dayObjectFromElement(dayElements[i]);
         if (!dayObj)
             continue;
         dayObj.hideEventsOfCalendarType(calendarType);
+    }
+}
+function deleteEventsOfCalendarType(calendarType) {
+    var dayElements = document.getElementById("daysGrid").childNodes;
+    for (var i = 0; i < dayElements.length; i++) {
+        var dayObj = dayObjectFromElement(dayElements[i]);
+        if (!dayObj)
+            continue;
+        dayObj.deleteEventsOfCalendarType(calendarType);
     }
 }
 
@@ -133,7 +164,7 @@ function calendarClicked(event) {
         if (checked)
             addEventsOfCalendarType(calendarType);
         else
-            removeEventsOfCalendarType(calendarType);
+            hiddenEventsOfCalendarType(calendarType);
     }
 }
 

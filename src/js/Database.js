@@ -112,7 +112,7 @@ var ReminderDatabase = {
         function sqlTransactionCallback(tx) {
             tx.executeSql(deleteEventStatement, sqlArguments);
         }
-
+     
         ReminderDatabase.db.transaction(sqlTransactionCallback);
     },
 

@@ -14,46 +14,50 @@
 <body onload="pageLoaded()">
 <div id="sidePanel">
     <h3>Add New Type:</h3>
+
     <div id="colorBox">
-        <div val="1" class="colorBlock" >
+        <div val="1" class="colorBlock">
             <a hidefocus="true" style="background-color:#fe0100;border-color:#a70202"></a>
         </div>
-        <div val="256" class="colorBlock" >
-            <a  hidefocus="true" style="background-color:#ff6d00;border-color:#b85500"></a>
+        <div val="256" class="colorBlock">
+            <a hidefocus="true" style="background-color:#ff6d00;border-color:#b85500"></a>
         </div>
-        <div val="2" class="colorBlock" >
-            <a  hidefocus="true" style="background-color:#fff000;border-color:#c5b611"></a>
+        <div val="2" class="colorBlock">
+            <a hidefocus="true" style="background-color:#fff000;border-color:#c5b611"></a>
         </div>
-        <div val="4" class="colorBlock" >
-            <a  hidefocus="true" style="background-color:#57c409;border-color:#358025"></a>
+        <div val="4" class="colorBlock">
+            <a hidefocus="true" style="background-color:#57c409;border-color:#358025"></a>
         </div>
-        <div val="8" class="colorBlock" >
-            <a  hidefocus="true" style="background-color:#2beceb;border-color:#049193"></a>
+        <div val="8" class="colorBlock">
+            <a hidefocus="true" style="background-color:#2beceb;border-color:#049193"></a>
         </div>
-        <div val="16" class="colorBlock" >
-            <a  hidefocus="true" style="background-color:#006aff;border-color:#004ab3"></a>
+        <div val="16" class="colorBlock">
+            <a hidefocus="true" style="background-color:#006aff;border-color:#004ab3"></a>
         </div>
-        <div val="32" class="colorBlock" >
-            <a  hidefocus="true" style="background-color:#9300fc;border-color:#6800c3"></a>
+        <div val="32" class="colorBlock">
+            <a hidefocus="true" style="background-color:#9300fc;border-color:#6800c3"></a>
         </div>
-        <div val="64" class="colorBlock" >
-            <a  hidefocus="true" style="background-color:#ff1fcd;border-color:#b00097"></a>
+        <div val="64" class="colorBlock">
+            <a hidefocus="true" style="background-color:#ff1fcd;border-color:#b00097"></a>
         </div>
-        <div val="128" class="colorBlock" >
-            <a  hidefocus="true" style="background-color:#6a3100;border-color:#482501"></a>
+        <div val="128" class="colorBlock">
+            <a hidefocus="true" style="background-color:#6a3100;border-color:#482501"></a>
         </div>
-        <div val="512" class="colorBlock" >
-            <a  hidefocus="true" style="background-color:#000000;border-color:#000000"></a>
+        <div val="512" class="colorBlock">
+            <a hidefocus="true" style="background-color:#000000;border-color:#000000"></a>
         </div>
     </div>
     <div id="addCalendarType">
         <input type="text" id="newTypeValue" name="typeName">
-        <input class="addButton" type="button" onclick="addType()" value="AddType">
+
+        <div>
+            <input class="removeButton" type="button" onclick="removeType()" value="Remove">
+            <input class="addButton" type="button" onclick="addType()" value="Add">
+        </div>
     </div>
-    <ul id="calendarList">
-    </ul>
+    <ul id="calendarList"></ul>
     <div id="activationChart">
-           <h3>Statistic Graph:</h3>
+        <h3>Statistic Graph:</h3>
     </div>
     <input class="query" type="button" value="Query" onclick="queryChar()">
     <canvas id="chart" width="300" height="300"></canvas>
@@ -61,6 +65,7 @@
 <div id="eventOverlay">
     <div id="details">
         <h2 id="detailEvent">Event</h2>
+
         <div id="eventTitle" contenteditable="true">Input Title</div>
         <dl>
             <dt>Location</dt>
@@ -96,6 +101,7 @@
 <div id="gridView">
     <div class="navButtonGroup">
         <input class="navButton" type="button" onclick="previousMonth()" value="Prev">
+
         <h2><span id="monthTitle"></span></h2>
         <input class="navButton" type="button" onclick="nextMonth()" value="Next">
     </div>
@@ -113,6 +119,7 @@
 </div>
 <div id="rightPanel">
     <h3>Search</h3>
+
     <div id="searchArea">
         <input type="search" id="searchField" results="0" incremental="1" placeholder="" value=""
                onsearch="eventSearch(this.value)"></div>
