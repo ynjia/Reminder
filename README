@@ -3,3 +3,10 @@ Goal:
      1. Local database
      2. Canvas
      3. Local cache
+
+Usage:
+     1. Add event type by input type name and click type color on the left side
+     2. Add event by click the box of days, and input the event detail in the pop up window
+     3. Query event by the search box on the right side
+     4. Get the Statistic Graph of this month by click the button 'Query'
+     
