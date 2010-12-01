@@ -10,8 +10,6 @@ var maxPullOutDistance = 15;
 var currentPullOutDistance = 0;
 var totalValue = 0;
 var chartStartAngle = -.5 * Math.PI;
-var pullOutLabelPadding = 25;
-var pullOutFrameStep = 2;
 var chartRadius;
 var context;
 var animationId = 0;
@@ -48,11 +46,13 @@ var queryChar = function() {
 
 function drawSlice(context, slice) {
     var startX,startY;
+    var pullOutLabelPadding = 30;
+
     var startAngle = chartData[slice]['startAngle'] + chartStartAngle;
     var endAngle = chartData[slice]['endAngle'] + chartStartAngle;
     if (slice == currentPullOutSlice) {
         var midAngle = (startAngle + endAngle) / 2;
-        var actualPullOutDistance = currentPullOutDistance * easeOut(currentPullOutDistance / maxPullOutDistance, .8);
+        var actualPullOutDistance = currentPullOutDistance * ( Math.pow(1 - currentPullOutDistance / maxPullOutDistance, .8) + 1);
         startX = centreX + Math.cos(midAngle) * actualPullOutDistance;
         startY = centreY + Math.sin(midAngle) * actualPullOutDistance;
         context.fillStyle = chartColours[slice];
@@ -126,7 +126,7 @@ function startPullOut(slice) {
 }
 
 function pullOut() {
-    currentPullOutDistance += pullOutFrameStep;
+    currentPullOutDistance += 2;
     if (currentPullOutDistance >= maxPullOutDistance) {
         clearInterval(animationId);
         return;
@@ -139,8 +139,4 @@ function pushIn() {
     currentPullOutDistance = 0;
     clearInterval(animationId);
     draw();
-}
-
-function easeOut(ratio, power) {
-    return ( Math.pow(1 - ratio, power) + 1 );
 }

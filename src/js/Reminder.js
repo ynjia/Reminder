@@ -1,29 +1,12 @@
-var monthStrings = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 var monthOnDisplay;
 var dateToDayObjectMap;
-var selectedCalendarType = "";
-var selectedCalendarEvent = null;
+var selectedEventType = "";
+var selectedReminderEvent = null;
 var calendarStartTime = 0;
 var calendarEndTime = 0;
-var insertedStyleRuleIndexForDayBox = -1;
 var seletedColor = "background-color:#fe0100";
 
 initDatabase();
-function updateCalendarRowCount(count) {
-    var stylesheet = document.styleSheets[0];
-    if (count == 5) {
-        if (insertedStyleRuleIndexForDayBox >= 0) {
-            stylesheet.deleteRule(insertedStyleRuleIndexForDayBox);
-        }
-        insertedStyleRuleIndexForDayBox = -1;
-        return;
-    }
-    if (insertedStyleRuleIndexForDayBox < 0)
-        insertedStyleRuleIndexForDayBox = stylesheet.insertRule(".day.box { }", stylesheet.cssRules.length);
-    var styleRule = stylesheet.cssRules[insertedStyleRuleIndexForDayBox];
-    var h = 100 / count;
-    styleRule.style.height = h + "%";
-}
 
 function getSelectedColor() {
     $("#colorBox div.colorBlock").unbind('click').bind("click", function() {
@@ -38,19 +21,18 @@ function initColorBox() {
     });
 }
 
-function initEventCalendarType() {
+function initEventType() {
     $.each(localStorage.allTypes.split(":"), function() {
-        $("#eventCalendarType").append("<option value='" + this + "'>" + this + "</option>");
+        $("#eventEventType").append("<option value='" + this + "'>" + this + "</option>");
     })
 }
 
 function closeDialog(){
     $("#eventOverlay").removeClass("show");
     $("#gridView").removeClass("inactive");
-
 }
 
-function initMonthOnDisplay() {
+function initMonth() {
     monthOnDisplay = CalendarState.currentMonth();
     monthOnDisplayUpdated();
     getSelectedColor();
@@ -58,11 +40,13 @@ function initMonthOnDisplay() {
         localStorage.allTypes = "";
     }
     initColorBox();
-    initEventCalendarType();
+    initEventType();
 }
 
 function monthOnDisplayUpdated() {
-    document.getElementById("monthTitle").innerText = monthStrings[monthOnDisplay.getMonth()] + " " + monthOnDisplay.getFullYear();
+    var monthStrings = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+    $("#monthTitle").text(monthStrings[monthOnDisplay.getMonth()] + " " + monthOnDisplay.getFullYear());
     CalendarState.setCurrentMonth(monthOnDisplay.toString());
     initDaysGrid();
     ReminderDatabase.openReminderEvents();
@@ -76,7 +60,7 @@ function addType() {
     localStorage.setItem(value, content);
     localStorage.setItem(value + "_color", seletedColor);
     $("#calendarList").append(content);
-    $("#eventCalendarType").append("<option value='" + value + "'>" + value + "</option>");
+    $("#eventEventType").append("<option value='" + value + "'>" + value + "</option>");
 }
 
 function initDaysGrid() {
@@ -100,7 +84,6 @@ function initDaysGrid() {
         }
         doneWithThisMonth = (displayedDate.getMonth() != monthOnDisplay.getMonth());
     }
-    updateCalendarRowCount(rows);
     displayedDate.setDate(displayedDate.getDate() - 1);
     displayedDate.setHours(23, 59, 59, 999);
     calendarEndTime = displayedDate.getTime();
@@ -118,8 +101,7 @@ function addEventsOfCalendarType(calendarType) {
 }
 
 function removeEventsOfCalendarType(calendarType) {
-    var daysGridElement = document.getElementById("daysGrid");
-    var dayElements = daysGridElement.childNodes;
+    var dayElements = document.getElementById("daysGrid").childNodes;
     for (var i = 0; i < dayElements.length; i++) {
         var dayObj = dayObjectFromElement(dayElements[i]);
         if (!dayObj)
@@ -136,7 +118,7 @@ function pageLoaded() {
     var calendarCheckboxes = document.getElementById("calendarList").getElementsByTagName("INPUT");
     for (var i = 0; i < calendarCheckboxes.length; i++)
         calendarCheckboxes[i].checked = CalendarState.calendarChecked(calendarCheckboxes[i].id);
-    initMonthOnDisplay();
+    initMonth();
 }
 
 function previousMonth() {
@@ -150,14 +132,14 @@ function nextMonth() {
 }
 
 function calendarSelected(event) {
-    if (event.target.tagName == "INPUT" || selectedCalendarType == "")
+    if (event.target.tagName == "INPUT" || selectedEventType == "")
         return;
 
-    var oldSelectedInput = document.getElementById(selectedCalendarType);
+    var oldSelectedInput = document.getElementById(selectedEventType);
     var oldListItemElement = oldSelectedInput.findParentOfTagName("LI");
     oldListItemElement.removeStyleClass("selected");
     event.target.addStyleClass("selected");
-    selectedCalendarType = event.target.getElementsByTagName("INPUT")[0].id;
+    selectedEventType = event.target.getElementsByTagName("INPUT")[0].id;
 }
 
 function calendarClicked(event) {
@@ -175,8 +157,8 @@ function calendarClicked(event) {
 function keyUpHandler(event) {
     switch (event.keyIdentifier) {
         case "U+007F":   // Delete key
-            if (selectedCalendarEvent && selectedCalendarEvent.day)
-                selectedCalendarEvent.day.deleteEvent(selectedCalendarEvent);
+            if (selectedReminderEvent && selectedReminderEvent.day)
+                selectedReminderEvent.day.deleteEvent(selectedReminderEvent);
             break;
         default:
             break;
@@ -184,19 +166,19 @@ function keyUpHandler(event) {
 }
 
 function eventDetailsDismissed() {
-    if (selectedCalendarEvent) {
-        var listItemNode = selectedCalendarEvent.listItemNode;
+    if (selectedReminderEvent) {
+        var listItemNode = selectedReminderEvent.listItemNode;
         if (listItemNode != null) {
             listItemNode.removeStyleClass("selected");
-            selectedCalendarEvent.detailsUpdated();
+            selectedReminderEvent.detailsUpdated();
         }
     }
     closeDialog();
-    selectedCalendarEvent = null;
+    selectedReminderEvent = null;
     $("#gridView").removeClass("inactive");
 }
 
-function searchForEvent(query) {
+function eventSearch(query) {
     if (query.length == 0) {
         var searchResultsList = document.getElementById("searchResults");
         searchResultsList.removeChildren();

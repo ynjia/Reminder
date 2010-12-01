@@ -51,13 +51,13 @@ CalendarEvent.eventSelected = function(event) {
 };
 
 CalendarEvent.prototype.selected = function() {
-    if (selectedCalendarEvent == this) {
-        selectedCalendarEvent.show();
+    if (selectedReminderEvent == this) {
+        selectedReminderEvent.show();
         return;
     }
-    if (selectedCalendarEvent)
-        selectedCalendarEvent.listItemNode.removeStyleClass("selected");
-    selectedCalendarEvent = this;
+    if (selectedReminderEvent)
+        selectedReminderEvent.listItemNode.removeStyleClass("selected");
+    selectedReminderEvent = this;
     if (selectedCalendarEvent)
         selectedCalendarEvent.listItemNode.addStyleClass("selected");
 };
@@ -73,29 +73,29 @@ CalendarEvent.prototype.toString = function() {
 };
 
 CalendarEvent.prototype.show = function() {
-    document.getElementById("eventTitle").innerText = this.title;
-    document.getElementById("eventLocation").innerText = this.location;
-    document.getElementById("eventFromDate").innerText = this.date.toLocaleDateString();
-    document.getElementById("eventFromHours").innerText = this.from.getHours();
-    document.getElementById("eventFromMinutes").innerText = minutesString(this.from.getMinutes());
-    document.getElementById("eventToDate").innerText = this.date.toLocaleDateString();
-    document.getElementById("eventToHours").innerText = this.to.getHours();
-    document.getElementById("eventToMinutes").innerText = minutesString(this.to.getMinutes());
-    document.getElementById("eventCalendarType").value = this.calendar;
-    document.getElementById("eventDetails").innerText = this.details;
-    document.getElementById("gridView").addStyleClass("inactive");
-    document.getElementById("eventOverlay").addStyleClass("show");
+    $("#eventTitle").text(this.title);
+    $("#eventLocation").text(this.location);
+    $("#eventFromDate").text(this.date.toLocaleDateString());
+    $("#eventFromHours").text(this.from.getHours());
+    $("#eventFromMinutes").text(minutesString(this.from.getMinutes()));
+    $("#eventToDate").text(this.date.toLocaleDateString());
+    $("#eventToHours").text(this.to.getHours());
+    $("#eventToMinutes").text(minutesString(this.to.getMinutes()));
+    $("#eventEventType").val(this.calendar);
+    $("#eventDetails").text(this.details);
+    $("#gridView").addClass("inactive");
+    $("#eventOverlay").addClass("show");
 };
 
 CalendarEvent.prototype.detailsUpdated = function() {
-    this.title = document.getElementById("eventTitle").innerText;
-    this.location = document.getElementById("eventLocation").innerText;
-    this.from.setHours(document.getElementById("eventFromHours").innerText);
-    this.from.setMinutes(document.getElementById("eventFromMinutes").innerText);
-    this.to.setHours(document.getElementById("eventToHours").innerText);
-    this.to.setMinutes(document.getElementById("eventToMinutes").innerText);
-    this.calendar = document.getElementById("eventCalendarType").value;
-    this.details = document.getElementById("eventDetails").innerText;
+    this.title = $("#eventTitle").html();
+    this.location = $("#eventLocation").html();
+    this.from.setHours($("#eventFromHours").html());
+    this.from.setMinutes($("#eventFromMinutes").html());
+    this.to.setHours($("#eventToHours").html());
+    this.to.setMinutes($("#eventToMinutes").html());
+    this.calendar = $("#eventEventType").val();
+    this.details = $("#eventDetails").html();
 
     ReminderDatabase.saveEventToDB(this);
     if (!this.fromSearch && this.day)

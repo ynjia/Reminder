@@ -7,7 +7,7 @@
     <script type="text/javascript" src="js/Database.js"></script>
     <script type="text/javascript" src="js/Event.js"></script>
     <script type="text/javascript" src="js/Day.js"></script>
-    <script type="text/javascript" src="js/Utilities.js"></script>
+    <script type="text/javascript" src="js/Util.js"></script>
     <script type="text/javascript" src="js/Reminder.js"></script>
     <script type="text/javascript" src="js/Chart.js"></script>
 </head>
@@ -83,7 +83,7 @@
             </dd>
             <dt style="line-height: 23px;">Event Type</dt>
             <dd>
-                <select id="eventCalendarType">
+                <select id="eventEventType">
                 </select>
             </dd>
             <dt>Details</dt>
@@ -100,13 +100,13 @@
         <input class="navButton" type="button" onclick="nextMonth()" value="Next">
     </div>
     <div id="daysHeader">
-        <span class="day title">Sunday</span>
-        <span class="day title">Monday</span>
-        <span class="day title">Tuesday</span>
-        <span class="day title">Wednesday</span>
-        <span class="day title">Thursday</span>
-        <span class="day title">Friday</span>
-        <span class="day title">Saturday</span>
+        <span class="columnTitle">Sunday</span>
+        <span class="columnTitle">Monday</span>
+        <span class="columnTitle">Tuesday</span>
+        <span class="columnTitle">Wednesday</span>
+        <span class="columnTitle">Thursday</span>
+        <span class="columnTitle">Friday</span>
+        <span class="columnTitle">Saturday</span>
     </div>
     <div id="daysGrid">
     </div>
@@ -115,7 +115,7 @@
     <h3>Search</h3>
     <div id="searchArea">
         <input type="search" id="searchField" results="0" incremental="1" placeholder="" value=""
-               onsearch="searchForEvent(this.value)"></div>
+               onsearch="eventSearch(this.value)"></div>
     <ul id="searchResults">
     </ul>
 </div>

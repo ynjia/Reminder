@@ -16,8 +16,6 @@ body {
     width: 290px;
     background: #d4dde6;
     border-right: 1px solid #a5a5a5;
-    margin-left: 0;
-    margin-right: 0;
 }
 
 #addCalendarType {
@@ -58,11 +56,9 @@ body {
     top: -10px;
     bottom: 0;
     width: 285px;
-    height: 900px;
+    height: 870px;
     background: #d4dde6;
     border-left: 1px solid #a5a5a5;
-    margin-left: 0;
-    margin-right: 0;
     float: right;
 }
 
@@ -245,18 +241,18 @@ h3 {
     margin-top: 30px;
 }
 
-.day {
+.columnTitle {
     display: inline-block;
     width: 14%;
     float: left;
     -webkit-box-sizing: border-box;
 }
 
-.day:nth-child(7n+1), .day:nth-child(7n+7) {
+.columnTitle:nth-child(7n+1), .columnTitle:nth-child(7n+7) {
     width: 15%;
 }
 
-.day.title {
+span.columnTitle {
     color: #626262;
     text-align: center;
     font-weight: bold;
@@ -270,7 +266,7 @@ h3 {
     bottom: 0;
 }
 
-.day.box {
+.columnTitle.box {
     height: 20%;
     border: 1px #ccc;
     border-top-style: solid;
@@ -278,15 +274,15 @@ h3 {
     position: relative;
 }
 
-.day.box.today {
+.columnTitle.box.today {
     background: url(../images/blow.jpg) no-repeat center;
 }
 
-.day.box:nth-child(7n+7) {
+.columnTitle.box:nth-child(7n+7) {
     border-right-style: none;
 }
 
-.day .date {
+.columnTitle .date {
     color: #212121;
     text-align: right;
     font-size: 12px;
@@ -294,11 +290,11 @@ h3 {
     padding-top: 5px;
 }
 
-.day.box.notThisMonth .date {
+.columnTitle.box.notThisMonth .date {
     color: #a6a6a6;
 }
 
-.day .contents {
+.columnTitle .contents {
     position: absolute;
     left: 0;
     right: 0;
@@ -313,7 +309,7 @@ h3 {
     color: orange;
 }
 
-.day .contents li {
+.columnTitle .contents li {
     background-color: rgba(255, 255, 255, 0);
     padding-left: 8px;
     padding-right: 8px;

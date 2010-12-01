@@ -10,7 +10,7 @@ Day.prototype.attach = function(parent) {
         throw("html elements exist of this day!");
     this.divNode = document.createElement("div");
     this.divNode.dayObject = this;
-    this.divNode.addStyleClass("day");
+    this.divNode.addStyleClass("columnTitle");
     this.divNode.addStyleClass("box");
     if (this.date.getMonth() != monthOnDisplay.getMonth())
         this.divNode.addStyleClass("notThisMonth");
@@ -34,15 +34,15 @@ Day.newEvent = function(event) {
     if (!dayObj || dayObj.contentsListNode != element)
         return;
 
-    var calendarEvent = new CalendarEvent(dayObj.date, dayObj, selectedCalendarType, false);
+    var calendarEvent = new CalendarEvent(dayObj.date, dayObj, selectedEventType, false);
     calendarEvent.title = "Input Title";
     calendarEvent.from = dayObj.defaultEventStartTime();
     var endTime = new Date(calendarEvent.from);
-    endTime.setHours(endTime.getHours() + 1);
+    endTime.setHours(endTime.getHours() + 9);
     calendarEvent.to = endTime;
     dayObj.insertEvent(calendarEvent);
     ReminderDatabase.saveAsNewEventToDB(calendarEvent);
-    selectedCalendarEvent = calendarEvent;
+    selectedReminderEvent = calendarEvent;
     calendarEvent.show();
 
     stopEvent(event);
@@ -72,7 +72,7 @@ Day.prototype.deleteEvent = function(calendarEvent) {
 
 Day.prototype.hideEvent = function(calendarEvent) {
     calendarEvent.detach();
-    selectedCalendarEvent = null;
+    selectedReminderEvent = null;
     if (!this.eventsArray)
         return;
     var index = this.eventsArray.indexOf(calendarEvent);

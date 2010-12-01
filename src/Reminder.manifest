@@ -4,7 +4,7 @@ CACHE MANIFEST
 index.html
 css/Reminder.css
 js/Reminder.js
-js/Utilities.js
+js/Util.js
 js/Chart.js
 js/Event.js
 js/Day.js
