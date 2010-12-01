@@ -7,7 +7,6 @@ var calendarEndTime = 0;
 var seletedColor = "background-color:#fe0100";
 
 initDatabase();
-
 function getSelectedColor() {
     $("#colorBox div.colorBlock").unbind('click').bind("click", function() {
         var colorBlock = $(this);
@@ -27,7 +26,7 @@ function initEventType() {
     })
 }
 
-function closeDialog(){
+function closeDialog() {
     $("#eventOverlay").removeClass("show");
     $("#gridView").removeClass("inactive");
 }
@@ -45,7 +44,6 @@ function initMonth() {
 
 function monthOnDisplayUpdated() {
     var monthStrings = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-
     $("#monthTitle").text(monthStrings[monthOnDisplay.getMonth()] + " " + monthOnDisplay.getFullYear());
     CalendarState.setCurrentMonth(monthOnDisplay.toString());
     initDaysGrid();
@@ -55,7 +53,7 @@ function monthOnDisplayUpdated() {
 function addType() {
     var value = $("#newTypeValue").val();
     $("#newTypeValue").val("");
-    var content = "<li onclick='calendarSelected(event)'><span class='colorIndicator' style='" + seletedColor + "'></span><input type='checkbox' id='" + value + "' onchange='calendarClicked(event)'>" + value + "</li>";
+    var content = "<li><span class='colorIndicator' style='" + seletedColor + "'></span><input type='checkbox' id='" + value + "' onchange='calendarClicked(event)'>" + value + "</li>";
     localStorage.allTypes += value + ":";
     localStorage.setItem(value, content);
     localStorage.setItem(value + "_color", seletedColor);
@@ -114,10 +112,6 @@ function pageLoaded() {
     document.getElementById("gridView").addEventListener("selectstart", stopEvent, true);
     document.getElementById("searchResults").addEventListener("selectstart", stopEvent, true);
     document.body.addEventListener("keyup", keyUpHandler, false);
-
-    var calendarCheckboxes = document.getElementById("calendarList").getElementsByTagName("INPUT");
-    for (var i = 0; i < calendarCheckboxes.length; i++)
-        calendarCheckboxes[i].checked = CalendarState.calendarChecked(calendarCheckboxes[i].id);
     initMonth();
 }
 
@@ -131,27 +125,16 @@ function nextMonth() {
     monthOnDisplayUpdated();
 }
 
-function calendarSelected(event) {
-    if (event.target.tagName == "INPUT" || selectedEventType == "")
-        return;
-
-    var oldSelectedInput = document.getElementById(selectedEventType);
-    var oldListItemElement = oldSelectedInput.findParentOfTagName("LI");
-    oldListItemElement.removeStyleClass("selected");
-    event.target.addStyleClass("selected");
-    selectedEventType = event.target.getElementsByTagName("INPUT")[0].id;
-}
-
 function calendarClicked(event) {
-    if (event.target.tagName != "INPUT")
-        return;
-    var calendarType = event.target.id;
-    var checked = event.target.checked;
-    CalendarState.setCalendarChecked(calendarType, checked);
-    if (checked)
-        addEventsOfCalendarType(calendarType);
-    else
-        removeEventsOfCalendarType(calendarType);
+    if (event.target.tagName == "INPUT") {
+        var calendarType = event.target.id;
+        var checked = event.target.checked;
+        CalendarState.setCalendarChecked(calendarType, checked);
+        if (checked)
+            addEventsOfCalendarType(calendarType);
+        else
+            removeEventsOfCalendarType(calendarType);
+    }
 }
 
 function keyUpHandler(event) {
@@ -186,7 +169,6 @@ function eventSearch(query) {
         return;
     }
     query = "%" + query + "%";
-
     ReminderDatabase.queryEventsInDB(query);
 }
 

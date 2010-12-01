@@ -58,8 +58,8 @@ CalendarEvent.prototype.selected = function() {
     if (selectedReminderEvent)
         selectedReminderEvent.listItemNode.removeStyleClass("selected");
     selectedReminderEvent = this;
-    if (selectedCalendarEvent)
-        selectedCalendarEvent.listItemNode.addStyleClass("selected");
+    if (selectedReminderEvent)
+        selectedReminderEvent.listItemNode.addStyleClass("selected");
 };
 
 function minutesString(minutes) {
@@ -90,7 +90,7 @@ CalendarEvent.prototype.show = function() {
 CalendarEvent.prototype.detailsUpdated = function() {
     this.title = $("#eventTitle").html();
     this.location = $("#eventLocation").html();
-    this.from.setHours($("#eventFromHours").html());
+    this.from.setHours($("#eventFromHours").html().toString());
     this.from.setMinutes($("#eventFromMinutes").html());
     this.to.setHours($("#eventToHours").html());
     this.to.setMinutes($("#eventToMinutes").html());

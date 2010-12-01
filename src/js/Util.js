@@ -28,16 +28,6 @@ Element.prototype.removeChildren = function() {
         this.removeChild(this.firstChild);
 };
 
-Element.prototype.findParentOfTagName = function(tagName) {
-    var parent = this;
-    while (parent) {
-        if (parent.tagName == tagName)
-            return parent;
-        parent = parent.parentNode;
-    }
-    return null;
-};
-
 String.prototype.escapeCharacters = function(chars) {
     var foundChar = false;
     var length = chars.length;
@@ -63,14 +53,6 @@ String.prototype.escapeCharacters = function(chars) {
 
 String.prototype.escapeForRegExp = function() {
     return this.escapeCharacters("^[]{}()\\.$*+?|");
-};
-
-Number.constrain = function(num, min, max) {
-    if (num < min)
-        num = min;
-    else if (num > max)
-        num = max;
-    return num;
 };
 
 Date.prototype.isToday = function() {
