@@ -40,11 +40,18 @@ var queryChar = function() {
     centreX = canvasWidth / 2;
     centreY = canvasHeight / 2;
     chartRadius = Math.min(canvasWidth, canvasHeight) / 2 * 0.55;
-    var displayedDate = new Date(monthOnDisplay);
-    displayedDate.setDate($("#queryEventFromDate").html());
-    queryStartTime = displayedDate.getTime();
-    displayedDate.setDate($("#queryEventToDate").html());
-    queryEndTime = displayedDate.getTime();
+    var startDate = $("#queryEventFromDate").html();
+    var endDate = $("#queryEventToDate").html();
+    if (startDate && endDate) {
+        var displayedDate = new Date(monthOnDisplay);
+        displayedDate.setDate(startDate);
+        queryStartTime = displayedDate.getTime();
+        displayedDate.setDate(endDate);
+        queryEndTime = displayedDate.getTime();
+    }else{
+        queryStartTime = calendarStartTime;
+        queryEndTime = calendarEndTime;
+    }
     ReminderDatabase.initCanvas(draw);
     $('#chart').click(handleChartClick);
 };
