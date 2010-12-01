@@ -13,6 +13,8 @@ var chartStartAngle = -.5 * Math.PI;
 var chartRadius;
 var context;
 var animationId = 0;
+var queryStartTime = 0;
+var queryEndTime = 0;
 
 function draw() {
     context = canvas.getContext('2d');
@@ -38,7 +40,11 @@ var queryChar = function() {
     centreX = canvasWidth / 2;
     centreY = canvasHeight / 2;
     chartRadius = Math.min(canvasWidth, canvasHeight) / 2 * 0.55;
-
+    var displayedDate = new Date(monthOnDisplay);
+    displayedDate.setDate($("#queryEventFromDate").html());
+    queryStartTime = displayedDate.getTime();
+    displayedDate.setDate($("#queryEventToDate").html());
+    queryEndTime = displayedDate.getTime();
     ReminderDatabase.initCanvas(draw);
     $('#chart').click(handleChartClick);
 };

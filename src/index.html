@@ -58,6 +58,13 @@
     <ul id="calendarList"></ul>
     <div id="activationChart">
         <h3>Statistic Graph:</h3>
+
+        <div id="queryEventFrom">
+            <span>From Date:</span><span id="queryEventFromDate" contentEditable="true">1</span>
+        </div>
+        <div id="queryEventTo">
+            <span>To Date:</span><span id="queryEventToDate" contentEditable="true">30</span>
+        </div>
     </div>
     <input class="query" type="button" value="Query" onclick="queryChar()">
     <canvas id="chart" width="300" height="300"></canvas>
